@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Response;
 use Illuminate\Support\Str;
-
+use App\Models\ProductSizeStock;
 use App\Models\Product;
 
 
@@ -19,7 +20,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with('category','brand')->get();
         return view('products.index', compact('products'));
     }
 
@@ -85,7 +86,23 @@ class ProductsController extends Controller
         //product save
         $product->save();
 
-        return $request->all();
+
+        //Product Size Stock(items)
+        if($request->items){
+            foreach (json_decode($request->items) as $item) {
+                $size_stock = new ProductSizeStock();
+                $size_stock->product_id = $product->id;
+                $size_stock->size_id =$item->size_id;
+                $size_stock->location = $item->location;
+                $size_stock->quantity = $item->quantity;
+                //product size stock save
+                $size_stock->save();
+            }
+        } 
+
+        return response()->json([
+                'success' => true
+            ], Response::HTTP_OK);
     }
 
     /**
@@ -96,7 +113,9 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Product::with('category','brand','product_size_stock.size')->where('id', $id)
+            ->first();
+        return view('products.show', compact('product'));
     }
 
     /**
@@ -130,6 +149,11 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $product->delete();
+        //flash message
+        flash('Product deleted successfully')->success();
+        return back();
+
     }
 }

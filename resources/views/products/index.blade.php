@@ -30,8 +30,12 @@
                                 <thead>
                                 <tr>
                                     <th>#SL</th>
+                                    <th class="text-center">Image</th>
                                     <th>Name</th>
-                                    <th>Action</th>
+                                    <th>SKU</th>
+                                    <th>Category</th>
+                                    <th>Brand</th>
+                                    <th class="text-center">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -39,16 +43,25 @@
                                     @foreach($products as $key => $product)
                                         <tr>
                                             <td>{{ ++$key }}</td>
+                                            <td class="text-center">
+                                                <img width="64px" height="64px" src="{{ asset('storage/products_image/'. $product->image) }}" alt="Image">
+                                            </td>
                                             <td>{{ $product->name ?? '' }}</td>
-                                            <td>
-                                                <a href="{{ route('categories.edit', $product->id) }}" class="btn btn-sm btn-info">
+                                            <td>{{ $product->sku ?? '' }}</td>
+                                            <td>{{ $product->category->name ?? '' }}</td>
+                                            <td>{{ $product->brand->name ?? '' }}</td>
+                                            <td class="text-center" >
+                                                <a href="{{ route('products.show', $product->id) }}" class="btn btn-sm btn-primary">
+                                                    <i class="fa fa-desktop"></i> Show
+                                                </a>
+                                                <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm btn-info">
                                                     <i class="fa fa-edit"></i> Edit
                                                 </a>
                                                 <a href="javascript:;" class="btn btn-sm btn-danger sa-delete" data-form-id="product-delete-{{ $product->id }}">
                                                     <i class="fa fa-trash"></i> Delete
                                                 </a>
 
-                                                <form id="product-delete-{{ $product->id }}" action="{{ route('categories.destroy', $product->id) }}" method="post">
+                                                <form id="product-delete-{{ $product->id }}" action="{{ route('products.destroy', $product->id) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
 

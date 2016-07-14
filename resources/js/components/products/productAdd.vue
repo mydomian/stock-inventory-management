@@ -184,6 +184,7 @@ import Select2 from 'v-select2-component';
                 data.append('year', this.form.year)
                 data.append('description', this.form.description)
                 data.append('status', this.form.status)
+                data.append('items', JSON.stringify(this.form.items))
 
                 store.dispatch(actions.ADD_PRODUCTS, data);
             }
