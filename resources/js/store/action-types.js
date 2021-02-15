@@ -1,1 +1,1 @@
-action-types.js
+export const GET_CATEGORIES = 'GET_CATEGORIES'
