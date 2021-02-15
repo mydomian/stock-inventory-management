@@ -30,12 +30,10 @@
            
         </div>
 
-        <div id="app">
-            <hello></hello>
-        </div>
+       
 
 
 
-        <script src="{{ asset('js/app.js') }}"></script>
+        
     </body>
 </html>

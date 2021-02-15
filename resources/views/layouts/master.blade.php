@@ -11,7 +11,7 @@
  {{-- Sidebar --}}
  @include('layouts.partials._sidebar')
   
-  <div class="content-wrapper">
+  <div class="content-wrapper" id="app">
    	{{-- Flash Message --}}
   	@include('flash::message')
 
