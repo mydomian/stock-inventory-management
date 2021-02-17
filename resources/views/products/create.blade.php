@@ -18,14 +18,7 @@
 
     <div class="content">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-6">
-
-                    <product-add></product-add>
-                   
-                </div>
-            </div>
-            <!-- /.row -->
+            <product-add></product-add>
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
