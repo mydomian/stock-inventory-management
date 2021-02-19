@@ -47,7 +47,7 @@ Route::middleware(['auth:sanctum'])->group(function(){
     //Return Product
     Route::get('/return-products', [ReturnProductsController::class, 'getReturns'])->name('return');
     Route::post('/return-products', [ReturnProductsController::class, 'returnSubmit'])->name('returnSubmit');
-  
+    Route::get('/return-products/history', [ReturnProductsController::class, 'history'])->name('returnHistory');
 
     
 });

@@ -9,7 +9,7 @@ export default{
 			.then(res=>{
 				
 				if(res.data.success == true){
-					window.location.href="/return-products"
+					window.location.href="/return-products/history"
 				}
 			})
 			.catch(err=>{

@@ -61,5 +61,9 @@ class ReturnProductsController extends Controller
 
     }
 
-    
+    // Return History
+    public function history(){
+    	$stock_history = ReturnProduct::with('product', 'size')->orderBy('created_at', 'DESC')->get();
+    	return view('return_products.history', compact('stock_history'));
+    }
 }

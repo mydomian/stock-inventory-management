@@ -74,7 +74,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{-- {{ route('returnHistory') }} --}}" class="nav-link ">
+                <a href="{{ route('returnHistory') }}" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Return Product History</p>
                 </a>

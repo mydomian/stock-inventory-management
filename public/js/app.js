@@ -5022,7 +5022,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   var commit = _ref.commit;
   axios__WEBPACK_IMPORTED_MODULE_2___default().post('/return-products', payload).then(function (res) {
     if (res.data.success == true) {
-      window.location.href = "/return-products";
+      window.location.href = "/return-products/history";
     }
   })["catch"](function (err) {
     commit(_mutation_types__WEBPACK_IMPORTED_MODULE_1__.SET_ERRORS, err.response.data.errors);
