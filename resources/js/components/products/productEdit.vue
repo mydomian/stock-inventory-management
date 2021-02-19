@@ -1,12 +1,12 @@
 <template>
 
-<form @submit.prevent="submitForm" role="form" method="post">
+<form @submit.prevent="updateForm" role="form" method="post">
     <showErrors></showErrors>
     <div class="row">
        <div class="col-lg-6">
             <div class="card card-primary card-outline">
                         <div class="card-body">
-                            <h5 class="card-title">Create Product</h5><br>
+                            <h5 class="card-title">Update Product</h5><br>
 
                             <div class="card-body">
                                     <div class="form-group">
@@ -27,6 +27,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Image<span class="text-danger">*</span></label>
+                                        <img :src="product.product_image" class="image" alt="Image">
                                         <input @change="selectImage" type="file" class="form-control" placeholder="Select image">
                                            
                                     </div>
@@ -110,6 +111,9 @@ import Select2 from 'v-select2-component';
             Select2,
             showErrors
         },
+        //props
+        props: ['product'],
+
         data() {
             return {
                 form:{
@@ -152,6 +156,20 @@ import Select2 from 'v-select2-component';
             store.dispatch(actions.GET_BRANDS);
             //get sizes
             store.dispatch(actions.GET_SIZES);
+
+            //set old data
+            this.form.category_id = this.product.category_id
+            this.form.brand_id = this.product.brand_id
+            this.form.name = this.product.name
+            this.form.sku = this.product.sku
+            this.form.cost_price = this.product.cost_price
+            this.form.retail_price = this.product.retail_price
+            this.form.year = this.product.year
+            this.form.description = this.product.description
+            this.form.status = this.product.status
+            this.form.items = this.product.product_size_stock
+
+
         },
 
         methods:{
@@ -171,9 +189,11 @@ import Select2 from 'v-select2-component';
                 this.form.items.splice(index, 1)
             },
 
-            submitForm(){
-
-                let data = new FormData();
+            updateForm(){
+                    
+                let data = new FormData(); 
+            
+                data.append('_method', 'PUT')
                 data.append('category_id', this.form.category_id)
                 data.append('brand_id', this.form.brand_id)
                 data.append('sku', this.form.sku)
@@ -185,12 +205,26 @@ import Select2 from 'v-select2-component';
                 data.append('description', this.form.description)
                 data.append('status', this.form.status)
                 data.append('items', JSON.stringify(this.form.items))
-            
-                store.dispatch(actions.ADD_PRODUCTS, data);
+              
+                
+              
+                
+                let payload = {
+                    data: data,
+                    id: this.product.id
+                }
+                store.dispatch(actions.EDIT_PRODUCTS, payload);
             }
         }
 	}
 </script>
+
+<style scoped="">
+    .image{
+        width: 100px;
+        height: 50px;
+    }
+</style>
 
 
 

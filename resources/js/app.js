@@ -5,6 +5,7 @@ require('alpinejs');
 import Vue from 'vue'
 Vue.component('hello', require('./components/Text.vue').default)
 Vue.component('product-add', require('./components/products/productAdd.vue').default)
+Vue.component('product-edit', require('./components/products/productEdit.vue').default)
 
 
 //--Emport--

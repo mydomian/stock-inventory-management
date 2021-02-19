@@ -4,5 +4,7 @@ export const GET_CATEGORIES = 'GET_CATEGORIES'
 export const GET_BRANDS = 'GET_BRANDS'
 //sizes
 export const GET_SIZES = 'GET_SIZES'
-//products
+//products add
 export const ADD_PRODUCTS = 'ADD_PRODUCTS'
+//products edit
+export const EDIT_PRODUCTS = 'EDIT_PRODUCTS'

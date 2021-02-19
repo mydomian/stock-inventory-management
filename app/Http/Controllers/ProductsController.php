@@ -79,10 +79,12 @@ class ProductsController extends Controller
         $product->status = $request->status;
 
         //upload image
-        $image = $request->image;
-        $name = Str::random(60). '.' . $image->getClientOriginalExtension();
-        $image->storeAs('public/products_image', $name);
-        $product->image = $name;
+        if($request->hasFile('image')){
+            $image = $request->image;
+            $name = Str::random(60). '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/products_image', $name);
+            $product->image = $name;
+        }
         //product save
         $product->save();
 
@@ -99,6 +101,8 @@ class ProductsController extends Controller
                 $size_stock->save();
             }
         } 
+
+        flash('Product Created Successfully')->success();
 
         return response()->json([
                 'success' => true
@@ -126,7 +130,8 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::with('product_size_stock')->where('id', $id)->first();
+        return view('products.edit', compact('product'));
     }
 
     /**
@@ -138,7 +143,71 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //validate
+        $validate = Validator::make($request->all(), [
+                'category_id'=> 'required|numeric',
+                'brand_id'=> 'required|numeric',
+                'sku'=> 'required|string|max:100|unique:products,sku,'.$id,
+                'name'=> 'required|string|min:2|max:200',
+                'image'=> 'nullable|image|mimes:jpeg,jpg,png|max:1024',
+                'cost_price'=> 'required|numeric',
+                'retail_price'=> 'required|numeric',
+                'year'=> 'required',
+                'description'=> 'required|max:200',
+                'status'=> 'required|numeric'
+        ]);
+
+        //error handles
+        if($validate->fails()){
+            return response()->json([
+                'success' => false,
+                'errors' => $validate->errors()
+            ], \Illuminate\Http\Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+
+        $product = Product::findOrFail($id);
+        $product->user_id = Auth::id();
+        $product->category_id = $request->category_id;
+        $product->brand_id = $request->brand_id;
+        $product->name = $request->name;
+        $product->sku = $request->sku;
+        $product->cost_price = $request->cost_price;
+        $product->retail_price = $request->retail_price;
+        $product->year = $request->year;
+        $product->description = $request->description;
+        $product->status = $request->status;
+
+        //upload image
+        if($request->hasFile('image')){
+            $image = $request->image;
+            $name = Str::random(60). '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/products_image', $name);
+            $product->image = $name;
+        }
+        //product save
+        $product->save();
+
+        //delete items old data
+        ProductSizeStock::where('product_id', $id)->delete();
+        //Product Size Stock(items)
+        if($request->items){
+            foreach (json_decode($request->items) as $item) {
+                $size_stock = new ProductSizeStock();
+                $size_stock->product_id = $product->id;
+                $size_stock->size_id =$item->size_id;
+                $size_stock->location = $item->location;
+                $size_stock->quantity = $item->quantity;
+                //product size stock save
+                $size_stock->save();
+            }
+        } 
+
+        flash("Product Updated Successfully")->success();
+
+        return response()->json([
+                'success' => true
+            ], Response::HTTP_OK);
     }
 
     /**

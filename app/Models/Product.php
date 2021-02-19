@@ -9,9 +9,17 @@ class Product extends Model
 {
     use HasFactory;
 
+    //image path
+    protected $appends = ['product_image'];
+
     // Const
     public const STATUS_ACTIVE = 1;
     public const STATUS_INACTIVE = 0;
+
+    //product_image
+    public function getProductImageAttribute(){
+        return asset('storage/products_image/'.$this->image);
+    }
 
     //category data
     public function category(){
