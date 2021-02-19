@@ -10,7 +10,7 @@ class Product extends Model
     use HasFactory;
 
     //image path
-    protected $appends = ['product_image'];
+    protected $appends = ['product_image','text'];
 
     // Const
     public const STATUS_ACTIVE = 1;
@@ -19,6 +19,10 @@ class Product extends Model
     //product_image
     public function getProductImageAttribute(){
         return asset('storage/products_image/'.$this->image);
+    }
+    //product text
+    public function getTextAttribute(){
+        return $this->name;
     }
 
     //category data

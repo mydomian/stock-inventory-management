@@ -225,4 +225,15 @@ class ProductsController extends Controller
         return back();
 
     }
+
+    // Product Ajax Called
+
+    public function getProductsJson(){
+        $product = Product::with('product_size_stock.size')->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $product
+        ], Response::HTTP_OK);
+    }
 }

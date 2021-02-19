@@ -8,3 +8,7 @@ export const GET_SIZES = 'GET_SIZES'
 export const ADD_PRODUCTS = 'ADD_PRODUCTS'
 //products edit
 export const EDIT_PRODUCTS = 'EDIT_PRODUCTS'
+//get product
+export const GET_PRODUCTS = 'GET_PRODUCTS'
+//stock
+export const SUBMIT_STOCKS = 'SUBMIT_STOCKS'
