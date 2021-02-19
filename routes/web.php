@@ -17,6 +17,7 @@ use \App\Http\Controllers\BrandController;
 use \App\Http\Controllers\SizesController;
 use \App\Http\Controllers\ProductsController;
 use \App\Http\Controllers\StocksController;
+use \App\Http\Controllers\ReturnProductsController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -42,9 +43,11 @@ Route::middleware(['auth:sanctum'])->group(function(){
     //stock
     Route::get('/stocks', [StocksController::class, 'getProducts'])->name('stocks');
     Route::post('/stocks', [StocksController::class, 'stockSubmit'])->name('stockSubmit');
-    //stockHistory
     Route::get('/stocks/history', [StocksController::class, 'history'])->name('stockHistory');
-
+    //Return Product
+    Route::get('/return-products', [ReturnProductsController::class, 'getReturns'])->name('return');
+    Route::post('/return-products', [ReturnProductsController::class, 'returnSubmit'])->name('returnSubmit');
+  
 
     
 });

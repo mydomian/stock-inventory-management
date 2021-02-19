@@ -12,3 +12,5 @@ export const EDIT_PRODUCTS = 'EDIT_PRODUCTS'
 export const GET_PRODUCTS = 'GET_PRODUCTS'
 //stock
 export const SUBMIT_STOCKS = 'SUBMIT_STOCKS'
+//return product
+export const SUBMIT_RETURNS = 'SUBMIT_RETURNS'
