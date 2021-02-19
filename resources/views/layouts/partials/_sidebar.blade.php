@@ -1,6 +1,4 @@
-<!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -10,6 +8,7 @@
           <a href="#" class="d-block">{{ Auth::user()->name }}</a>
         </div>
       </div>
+
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -26,7 +25,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link ">
+                <a href="{{ route('users.index') }}" class="nav-link ">
                   <i class="far fa-circle nav-icon"></i>
                   <p>User</p>
                 </a>
@@ -79,18 +78,30 @@
                   <p>Return Product History</p>
                 </a>
               </li>
-
               
+
+
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+
+                <a class="nav-link" href="{{ route('logout') }}"
+                         onclick="event.preventDefault();
+                                this.closest('form').submit();">
+                    <i class="nav-icon fas fa-th"></i>{{ __('Logout') }}
+                </a>
+            </form>
+
+            {{-- <a href="#" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Simple Link
                 <span class="right badge badge-danger">New</span>
               </p>
-            </a>
+            </a> --}}
           </li>
         </ul>
       </nav>
@@ -98,5 +109,3 @@
     </div>
     <!-- /.sidebar -->
   </aside>
-
-  <!-- Content Wrapper. Contains page content -->

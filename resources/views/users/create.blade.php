@@ -4,12 +4,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Categories</h1>
+                    <h1 class="m-0 text-dark">User</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                        <li class="breadcrumb-item active">Category Create</li>
+                        <li class="breadcrumb-item active">User Create</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -23,9 +23,9 @@
 
                     <div class="card card-primary card-outline">
                         <div class="card-body">
-                            <h5 class="card-title">Create Category</h5><br>
+                            <h5 class="card-title">User Category</h5><br>
 
-                            <form role="form" action="{{ route('categories.store') }}" method="post">
+                            <form role="form" action="{{ route('users.store') }}" method="post">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
@@ -34,6 +34,25 @@
                                         @if($errors->has('name'))
                                             <span class="text-danger">{{ $errors->first('name') }}</span>
                                         @endif
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Email<span class="text-danger">*</span></label>
+                                        <input name="email" type="email" class="form-control" placeholder="Enter your email">
+                                        @if($errors->has('email'))
+                                            <span class="text-danger">{{ $errors->first('email') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Password<span class="text-danger">*</span></label>
+                                        <input name="password" type="text" class="form-control" placeholder="Enter uniqe password">
+                                        @if($errors->has('password'))
+                                            <span class="text-danger">{{ $errors->first('password') }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Confirm Password<span class="text-danger">*</span></label>
+                                        <input name="password_confirmation" type="password" class="form-control" placeholder="Confirm password">
+                                        
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
