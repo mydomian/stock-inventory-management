@@ -23,14 +23,14 @@
 
                     <div class="card card-primary card-outline">
                         <div class="card-body">
-                            <h5 class="card-title">User Category</h5><br>
+                            <h5 class="card-title">User </h5><br>
 
                             <form role="form" action="{{ route('users.store') }}" method="post">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Name<span class="text-danger">*</span></label>
-                                        <input name="name" type="text" class="form-control" placeholder="Enter category name">
+                                        <input name="name" type="text" class="form-control" placeholder="Enter your name">
                                         @if($errors->has('name'))
                                             <span class="text-danger">{{ $errors->first('name') }}</span>
                                         @endif

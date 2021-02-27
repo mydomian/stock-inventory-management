@@ -34,7 +34,7 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Created At</th>
-                                    <th>Action</th>
+                                    <th class="text-center">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -45,7 +45,7 @@
                                             <td>{{ $users->name ?? '' }}</td>
                                             <td>{{ $users->email ?? '' }} @if(Auth::id() == $users->id) (you) @endif</td>
                                             <td>{{ $users->created_at->format('yy-m-d') ?? '' }}</td>
-                                            <td>
+                                            <td class="text-center">
                                                 <a href="{{ route('users.edit', $users->id) }}" class="btn btn-sm btn-info">
                                                    <i class="fa fa-edit"></i> Edit
                                                 </a>

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+use \App\Http\Controllers\DashboardsController;
 use \App\Http\Controllers\UsersController;
 use \App\Http\Controllers\CategoriesController;
 use \App\Http\Controllers\BrandController;
@@ -22,14 +23,12 @@ use \App\Http\Controllers\ReturnProductsController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-
 Route::middleware(['auth:sanctum'])->group(function(){
+    //Dashboar
+    Route::get('/dashboard', [DashboardsController::class, 'dshIndex'])->name('dashboard');
     //User
     Route::resource('users', UsersController::class);
     // Category

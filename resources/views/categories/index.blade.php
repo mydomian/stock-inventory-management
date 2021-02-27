@@ -32,7 +32,7 @@
                                 <tr>
                                     <th>#SL</th>
                                     <th>Name</th>
-                                    <th>Action</th>
+                                    <th class="text-center">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -41,7 +41,7 @@
                                         <tr>
                                             <td>{{ ++$key }}</td>
                                             <td>{{ $category->name ?? '' }}</td>
-                                            <td>
+                                            <td class="text-center">
                                                 <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-sm btn-info">
                                                    <i class="fa fa-edit"></i> Edit
                                                 </a>
